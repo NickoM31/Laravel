@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
     public function getIndex(){
     	$produits = Product::all();
-    	return view('welcome', [$produits]);
+    	return view('viewPanier', ['produits'=> $produits]);
+    	
 
     }
 }

@@ -30,4 +30,18 @@ class ProductController extends Controller
 		return back();
 
 	}
+	public function postProduct(Request $request){
+		Product::create($request->all()); 
+		return redirect()->action('ProductController@getIndex');
+	}
+
+	// public function modifProduct(){
+
+	// }
+	public function deletProduct($id){
+		$produits = Product::find($id);
+		$produits->delete();
+		return redirect()->action('ProductController@getIndex');
+
+	}
 }

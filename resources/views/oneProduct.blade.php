@@ -7,22 +7,36 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
 </head>
 <body>
-<div class="ui centered card">
-		<h3>{{$produits->name}}</h3>
+	<div class="ui inverted orange centered card">
+		<h3 style="text-align:center">{{$produits->name}}</h3>
 		<div>Provenance : {{$produits->description}}</div>
 		<div>Prix : {{$produits->price/100}} €</div>
 		<div>En stock : {{$produits->stock}}</div>
-
-		<form action="/products/sold/{{$produits->id}}" method="post">
+		<table>
+			<tr>
+				<td>
+					<form action="/products/sold/{{$produits->id}}" method="post">
+						{{csrf_field()}}
+						<button class="ui orange button">+</button>
+					</form>
+				</td>
+				<td>
+					<form action="/products/restock/{{$produits->id}}" method="post">
+						{{csrf_field()}}
+						<button class="ui orange button">-</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<form action="/products/{{$produits->id}}" method="post">
 			{{csrf_field()}}
-			<button class="ui button">+</button>
+			{{method_field('DELETE')}}
+			<button class="ui black button">Supprimer produit</button>
 		</form>
-		<form action="/products/restock/{{$produits->id}}" method="post">
-			{{csrf_field()}}
-			<button class="ui button">-</button>
-		</form>
-		<a href="/products">Revenir à la liste</a>
 	</div>
-	
+	<div style="text-align:center" >
+		<a href="/products" class="ui orange button">Revenir à la liste</a>
+	</div>
+
 </body>
 </html>

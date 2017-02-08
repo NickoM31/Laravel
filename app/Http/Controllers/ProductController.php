@@ -35,13 +35,19 @@ class ProductController extends Controller
 		return redirect()->action('ProductController@getIndex');
 	}
 
-	// public function modifProduct(){
-
-	// }
 	public function deletProduct($id){
 		$produits = Product::find($id);
 		$produits->delete();
 		return redirect()->action('ProductController@getIndex');
+	}
 
+	public function modifProduct(Request $request){
+		$produits = Product::find($request->id);
+		$produits->name = $request->name;
+		$produits->description = $request->description;
+		$produits->price = $request->price;
+		$produits->stock = $request->stock;
+		$produits->save();
+		return redirect()->action('ProductController@getIndex');
 	}
 }
